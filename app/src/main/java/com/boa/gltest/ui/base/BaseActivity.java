@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.boa.gltest.BuildConfig;
 import com.boa.gltest.R;
 
 import butterknife.ButterKnife;
@@ -16,7 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        ButterKnife.bind(this);
+        ButterKnife.inject(this);
     }
 
     public void showLoading() {
@@ -27,6 +28,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void showError(Exception e) {
         Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        if (BuildConfig.ShowLogs) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+
         hideLoading();
     }
 

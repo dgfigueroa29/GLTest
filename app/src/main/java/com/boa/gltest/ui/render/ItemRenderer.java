@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.boa.gltest.R;
@@ -12,31 +13,34 @@ import com.boa.gltest.global.model.Item;
 import com.pedrogomez.renderers.Renderer;
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class ItemRenderer extends Renderer<Item> {
     private Context context;
     private OnItemClicked listener;
 
-    @Bind(R.id.ivItem)
-    ImageView ivItem;
-
-    @Bind(R.id.tvItemTitle)
-    TextView tvItemTitle;
-
-    @Bind(R.id.tvItemDescription)
-    TextView tvItemDescription;
-
     public ItemRenderer(Context context, OnItemClicked listener) {
-        this.context = context;
+        this.context = context.getApplicationContext();
         this.listener = listener;
     }
 
+    @InjectView(R.id.ivItem)
+    ImageView ivItem;
+
+    @InjectView(R.id.tvItemTitle)
+    TextView tvItemTitle;
+
+    @InjectView(R.id.tvItemDescription)
+    TextView tvItemDescription;
+
+    @InjectView(R.id.rlItem)
+    RelativeLayout rlItem;
+
     @Override
     protected void setUpView(View rootView) {
-        ButterKnife.bind(rootView);
+        ButterKnife.inject(this, rootView);
     }
 
     @Override

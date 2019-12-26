@@ -5,7 +5,8 @@
     <dimen name="user_w">128dp</dimen>
     <dimen name="user_h">128dp</dimen>
     <dimen name="half_separation">5dp</dimen>
-    <dimen name="double_separation">20dp</dimen>
+    <dimen name="simple_separation">16dp</dimen>
+    <dimen name="double_separation">32dp</dimen>
     <dimen name="primary_font_size">16sp</dimen>
     <dimen name="secondary_font_size">13sp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>

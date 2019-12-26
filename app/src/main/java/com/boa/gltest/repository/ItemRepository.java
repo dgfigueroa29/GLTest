@@ -77,4 +77,10 @@ public class ItemRepository implements GetItems {
         context.getSharedPreferences("boa", Context.MODE_PRIVATE).edit()
                 .putString("item", json).apply();
     }
+
+    public static Item bring(Context context) {
+        String json = context.getSharedPreferences("boa", Context.MODE_PRIVATE)
+                .getString("item", "");
+        return new Gson().fromJson(json, Item.class);
+    }
 }

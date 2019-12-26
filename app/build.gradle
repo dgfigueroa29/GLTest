@@ -13,7 +13,7 @@ android {
     }
     buildTypes {
         release {
-            buildConfigField("boolean", "ShowLogs", "true")
+            buildConfigField("boolean", "ShowLogs", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }

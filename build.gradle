@@ -1,11 +1,11 @@
 buildscript {
     ext.retrofit_version = "2.5.0"
-    ext.butterknife_version = "7.0.1"
+    ext.butterknife_version = "6.0.0"
     ext.dagger_version = "2.15"
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath "com.android.tools.build:gradle:3.5.3"
@@ -16,7 +16,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 

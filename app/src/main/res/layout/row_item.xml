@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:paddingStart="@dimen/double_separation"
-    android:paddingEnd="@dimen/double_separation">
+    android:paddingStart="@dimen/simple_separation"
+    android:paddingEnd="@dimen/simple_separation">
 
     <ImageView
         android:id="@+id/ivItem"
@@ -43,6 +43,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/loading"
+            android:textColor="@android:color/white"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="12sp"
             tools:text="Number" />

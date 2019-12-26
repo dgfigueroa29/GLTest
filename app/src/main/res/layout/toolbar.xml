@@ -8,7 +8,7 @@
     android:elevation="@dimen/toolbar_elevation"
     android:paddingTop="2dp"
     app:popupTheme="@style/AppTheme.PopupOverlay"
-    app:theme="@style/AppTheme.AppBarOverlay">
+    android:theme="@style/AppTheme.AppBarOverlay">
 
     <RelativeLayout
         android:id="@+id/rlCollapsed"

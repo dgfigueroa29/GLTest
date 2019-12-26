@@ -2,10 +2,10 @@ package com.boa.gltest.ui.feature.list;
 
 import android.content.Context;
 
+import com.boa.gltest.datasource.api.GetItemsApiImpl;
 import com.boa.gltest.global.App;
 import com.boa.gltest.global.di.RootComponent;
 import com.boa.gltest.global.model.Item;
-import com.boa.gltest.interactor.GetItemsInteractor;
 import com.boa.gltest.usecase.GetItems;
 
 import java.util.List;
@@ -14,22 +14,17 @@ import javax.inject.Inject;
 
 public class ListPresenter implements ListContract.Presenter {
     private ListContract.View view;
-
-    protected GetItems interactor;
     protected Context context;
 
-    private RootComponent component;
-
     @Inject
-    public ListPresenter(Context ctx, GetItemsInteractor getItemsInteractor) {
+    public ListPresenter(Context ctx) {
         context = ctx;
-        interactor = getItemsInteractor;
         getComponent().inject(this);
     }
 
     @Override
     public void getList() {
-        interactor.getAsync(new GetItems.Listener() {
+        new GetItemsApiImpl().getAsync(new GetItems.Listener() {
             @Override
             public void onItemsReceived(List<Item> items, boolean isCached) {
                 view.showList(items);
@@ -54,6 +49,7 @@ public class ListPresenter implements ListContract.Presenter {
 
     @Override
     public void resume() {
+        getList();
     }
 
     @Override

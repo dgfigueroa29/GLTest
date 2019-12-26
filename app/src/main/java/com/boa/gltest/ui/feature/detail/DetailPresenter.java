@@ -2,42 +2,22 @@ package com.boa.gltest.ui.feature.detail;
 
 import android.content.Context;
 
+import com.boa.gltest.datasource.preferences.GetItemPrefImpl;
 import com.boa.gltest.global.App;
 import com.boa.gltest.global.di.RootComponent;
-import com.boa.gltest.global.model.Item;
-import com.boa.gltest.usecase.GetItem;
 
 public class DetailPresenter implements DetailContract.Presenter {
     private DetailContract.View view;
     protected Context context;
-    protected GetItem interactor;
 
-    private RootComponent component;
-
-    public DetailPresenter(Context context, GetItem interactor) {
+    public DetailPresenter(Context context) {
         this.context = context;
-        this.interactor = interactor;
         getComponent().inject(this);
     }
 
     @Override
     public void getItem() {
-        interactor.getAsync(new GetItem.Listener() {
-            @Override
-            public void onItemReceived(Item item) {
-                view.showItem(item);
-            }
-
-            @Override
-            public void onError(Exception e) {
-                view.showListError(e);
-            }
-
-            @Override
-            public void onNoInternetAvailable() {
-                view.showNoInternetMessage();
-            }
-        });
+        view.showItem(new GetItemPrefImpl(context).get());
     }
 
     @Override
@@ -47,6 +27,7 @@ public class DetailPresenter implements DetailContract.Presenter {
 
     @Override
     public void resume() {
+        getItem();
     }
 
     @Override

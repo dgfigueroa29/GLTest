@@ -5,6 +5,7 @@ import com.boa.gltest.datasource.api.retrofit.GetItemsRequest;
 import com.boa.gltest.global.model.Item;
 import com.boa.gltest.usecase.GetItems;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +17,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GetItemsApiImpl implements GetItems, Callback<GetItemsResponse> {
+public class GetItemsApiImpl implements GetItems, Callback<List<Item>> {
     private Listener listener = new NullListener();
     public int timeout = 50;
 
@@ -48,26 +49,32 @@ public class GetItemsApiImpl implements GetItems, Callback<GetItemsResponse> {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://private-f0eea-mobilegllatam.apiary-mock.com/list")
+                .baseUrl("http://private-f0eea-mobilegllatam.apiary-mock.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
         GetItemsRequest request = retrofit.create(GetItemsRequest.class);
-        Call<GetItemsResponse> call = request.getItems();
+        Call<List<Item>> call = request.getItems();
         call.enqueue(this);
     }
 
     @Override
-    public void onResponse(Call<GetItemsResponse> call, Response<GetItemsResponse> response) {
+    public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
         if (response.body() != null) {
-            listener.onItemsReceived(response.body().getResults(), false);
+            List<Item> items = new ArrayList<>();
+
+            for (Item item : response.body()) {
+                items.add(item);
+            }
+
+            listener.onItemsReceived(items, false);
         } else {
             listener.onError(new NullPointerException());
         }
     }
 
     @Override
-    public void onFailure(Call<GetItemsResponse> call, Throwable t) {
+    public void onFailure(Call<List<Item>> call, Throwable t) {
         listener.onError(new Exception(t));
     }
 }
