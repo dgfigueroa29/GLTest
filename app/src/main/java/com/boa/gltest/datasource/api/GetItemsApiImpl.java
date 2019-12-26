@@ -48,7 +48,7 @@ public class GetItemsApiImpl implements GetItems, Callback<GetItemsResponse> {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://private-f0eea-mobilegllatam.apiary-mock.com")
+                .baseUrl("http://private-f0eea-mobilegllatam.apiary-mock.com/list")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

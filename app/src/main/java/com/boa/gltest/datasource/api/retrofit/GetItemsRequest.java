@@ -6,6 +6,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface GetItemsRequest {
-    @GET("/list")
+    @GET("/")
     Call<GetItemsResponse> getItems();
 }

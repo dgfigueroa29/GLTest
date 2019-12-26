@@ -72,6 +72,11 @@ public class DetailActivity extends BaseActivity implements DetailContract.View 
     }
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_detail;
+    }
+
+    @Override
     public void showNoInternetMessage() {
         showOfflineMessage();
     }

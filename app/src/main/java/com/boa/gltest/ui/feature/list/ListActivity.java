@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.LayoutInflater;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,7 +29,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class ListActivity extends BaseActivity implements ListContract.View {
     @Bind(R.id.listProgressBar)
@@ -44,7 +45,6 @@ public class ListActivity extends BaseActivity implements ListContract.View {
 
     @Inject
     GetItemsInteractor interactor;
-    //@Inject
     ShowItemClicked showItemClicked;
 
     private ListComponent component;
@@ -60,20 +60,24 @@ public class ListActivity extends BaseActivity implements ListContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         component().inject(this);
-        setContentView(R.layout.activity_list);
 
         adapter = new RVRendererAdapter<>(
                 LayoutInflater.from(this),
                 new ItemRendererBuilder(this, itemClicked),
                 new ListAdapteeCollection<>(new ArrayList<Item>())
         );
-        ButterKnife.bind(this);
-        list.setLayoutManager(new LinearLayoutManager(this));
+        list.setHasFixedSize(true);
+        list.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         list.setAdapter(adapter);
         presenter = new ListPresenter(this, interactor);
         presenter.attach(this);
         presenter.initialize();
         showLoading();
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_list;
     }
 
     @Override
@@ -88,12 +92,12 @@ public class ListActivity extends BaseActivity implements ListContract.View {
 
     @Override
     public void showLoading() {
-        listProgressBar.setVisibility(ProgressBar.VISIBLE);
+        listProgressBar.setVisibility(VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        listProgressBar.setVisibility(ProgressBar.GONE);
+        listProgressBar.setVisibility(GONE);
     }
 
     @Override
