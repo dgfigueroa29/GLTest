@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="user_thumbnail_w">64dp</dimen>
+    <dimen name="user_thumbnail_h">64dp</dimen>
+    <dimen name="user_w">128dp</dimen>
+    <dimen name="user_h">128dp</dimen>
+    <dimen name="half_separation">5dp</dimen>
+    <dimen name="double_separation">20dp</dimen>
+    <dimen name="primary_font_size">16sp</dimen>
+    <dimen name="secondary_font_size">13sp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="divider_size">1dp</dimen>
+</resources>
